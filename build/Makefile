@@ -311,12 +311,12 @@ $(obj).$(TOOLSET)/%.o: $(obj)/%.s FORCE_DO_CMD
 
 ifeq ($(strip $(foreach prefix,$(NO_LOAD),\
     $(findstring $(join ^,$(prefix)),\
-                 $(join ^,pipedexec.target.mk)))),)
-  include pipedexec.target.mk
+                 $(join ^,pse.target.mk)))),)
+  include pse.target.mk
 endif
 
 quiet_cmd_regen_makefile = ACTION Regenerating $@
-cmd_regen_makefile = cd $(srcdir); /usr/local/lib/node_modules/node-gyp/gyp/gyp_main.py -fmake --ignore-environment "--toplevel-dir=." -I/home/mta/Projects/node-pipedexec/build/config.gypi -I/usr/local/lib/node_modules/node-gyp/addon.gypi -I/home/mta/.node-gyp/0.10.26/common.gypi "--depth=." "-Goutput_dir=." "--generator-output=build" "-Dlibrary=shared_library" "-Dvisibility=default" "-Dnode_root_dir=/home/mta/.node-gyp/0.10.26" "-Dmodule_root_dir=/home/mta/Projects/node-pipedexec" binding.gyp
+cmd_regen_makefile = cd $(srcdir); /usr/local/lib/node_modules/node-gyp/gyp/gyp_main.py -fmake --ignore-environment "--toplevel-dir=." -I/home/mta/Projects/psync/build/config.gypi -I/usr/local/lib/node_modules/node-gyp/addon.gypi -I/home/mta/.node-gyp/0.10.26/common.gypi "--depth=." "-Goutput_dir=." "--generator-output=build" "-Dlibrary=shared_library" "-Dvisibility=default" "-Dnode_root_dir=/home/mta/.node-gyp/0.10.26" "-Dmodule_root_dir=/home/mta/Projects/psync" binding.gyp
 Makefile: $(srcdir)/../../.node-gyp/0.10.26/common.gypi $(srcdir)/build/config.gypi $(srcdir)/binding.gyp $(srcdir)/../../../../usr/local/lib/node_modules/node-gyp/addon.gypi
 	$(call do_cmd,regen_makefile)
 
