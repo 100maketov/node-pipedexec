@@ -1,3 +1,5 @@
-var pse = require('./build/Release/pse');
+
+var pse;
+pse = require('./build/Release/pse');
 
 console.log(pse.exec('python', './sleep.py'));
