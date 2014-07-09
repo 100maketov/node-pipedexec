@@ -1,0 +1,29 @@
+{
+  "name": "node-pipedexec",
+  "version": "0.9.0",
+  "description": "\"Sycn process call for Linux/Windows based on pipes.\"",
+  "main": " ",
+  "dependencies": {
+    "node-gyp": "^0.13.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "node-gyp rebuild"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/TiMirLAN/node-pipedexec.git"
+  },
+  "keywords": [
+    "sync",
+    "exec"
+  ],
+  "author": "TiMirLAN",
+  "license": "ISC",
+  "gypfile": true,
+  "bugs": {
+    "url": "https://github.com/TiMirLAN/node-pipedexec/issues"
+  },
+  "homepage": "https://github.com/TiMirLAN/node-pipedexec"
+}
