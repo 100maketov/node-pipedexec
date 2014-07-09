@@ -6,7 +6,10 @@
                     "target_name": "pse",
                     "sources": ["wpse.cpp"]
                 }
-            ]
+            ],
+			"configurations": {
+				"Release": {}
+			}
         },{
             "targets": [
                 {
