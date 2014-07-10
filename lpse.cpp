@@ -12,6 +12,8 @@ Handle<Value> sexec(const Arguments& args) {
     int stdoutPipeFD[2];
     int stderrPipeFD[2];
     char **arguments = new char*[args.Length()+1];
+    Handle<String> target = String::Empty();
+    Handle<String> space = String::New(" ");
     
     if (pipe(stdoutPipeFD) == -1 || pipe(stderrPipeFD) == -1) {
         return ThrowException(String::New("Pipe not created"));
@@ -22,6 +24,10 @@ Handle<Value> sexec(const Arguments& args) {
         arguments[i] = new char[s->length()];
         strcpy(arguments[i], **s);
         delete s;
+        target = String::Concat(target, args[i]->ToString());
+        if (i < args.Length()-1) {
+            target = String::Concat(target, space);
+        }
     }
     arguments[args.Length()] = NULL;
     
@@ -42,7 +48,7 @@ Handle<Value> sexec(const Arguments& args) {
         
         ret->Set(
             String::NewSymbol("target"),
-            String::New(arguments[0])
+            target
          );
         
         close(stdoutPipeFD[1]);
