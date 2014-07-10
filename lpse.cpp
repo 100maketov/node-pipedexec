@@ -7,40 +7,32 @@
 
 using namespace v8;
 
-
-char* ValueToChar(Handle<Value> val) {
-    String::Utf8Value s(val->ToString());
-    return (char*)std::string(*s, s.length()).data();
-}
-
-char** Params(const Arguments& args) {
-    char **results = new char*[args.Length()+1];
-    for (int i = 0; i < args.Length(); i++) {
-        char *arg = ValueToChar(args[i]);
-        results[i]=arg;
-    }
-    results[args.Length()] = NULL;
-    return results;
-}
-
-
 Handle<Value> sexec(const Arguments& args) {
     HandleScope scope;
     int stdoutPipeFD[2];
     int stderrPipeFD[2];
+    char **arguments = new char*[args.Length()+1];
     
     if (pipe(stdoutPipeFD) == -1 || pipe(stderrPipeFD) == -1) {
         return ThrowException(String::New("Pipe not created"));
     }
+    
+    for (int i = 0; i < args.Length(); i++) {
+        String::Utf8Value* s = new String::Utf8Value(args[i]->ToString());
+        arguments[i] = new char[s->length()];
+        strcpy(arguments[i], **s);
+        delete s;
+    }
+    arguments[args.Length()] = NULL;
+    
     if (fork() == 0) {
-        char **params = Params(args);
         close(stdoutPipeFD[0]);
         close(stderrPipeFD[0]);
         dup2(stdoutPipeFD[1], 1);
         dup2(stderrPipeFD[1], 2);
         close(stdoutPipeFD[1]);
         close(stderrPipeFD[1]);
-        execvp(params[0], params);
+        execvp(arguments[0], arguments);
     } else {
         char buff[1024];
         Local<String> stdout = String::Empty();
@@ -50,7 +42,7 @@ Handle<Value> sexec(const Arguments& args) {
         
         ret->Set(
             String::NewSymbol("target"),
-            args[0]
+            String::New(arguments[0])
          );
         
         close(stdoutPipeFD[1]);
