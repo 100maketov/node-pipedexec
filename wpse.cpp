@@ -46,7 +46,7 @@ Handle<Value> sexec(const Arguments& args) {
 	si.hStdError = hErrWritePipe;
 
 	for (int i = 0; i < args.Length(); i++) {
-		lstrCmd = String::Concat(lstrCmd, args[i]->ToString());
+		lstrCmd = String::Concat(String::Concat(String::Concat(lstrCmd, String::New("\"")), args[i]->ToString()), String::New("\""));
 		if (i < (args.Length() - 1)) {
 			lstrCmd = String::Concat(lstrCmd, String::New(" "));
 		}
