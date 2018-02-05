@@ -1,6 +1,6 @@
 {
   "name": "node-pipedexec",
-  "version": "0.9.5",
+  "version": "0.9.6",
   "description": "\"Sycn process call for Linux/Windows based on pipes.\"",
   "main": "index.js",
   "dependencies": {
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/a-iv/node-pipedexec.git"
+    "url": "git://github.com/100maketov/node-pipedexec.git"
   },
   "keywords": [
     "sync",
@@ -23,7 +23,7 @@
   "license": "ISC",
   "gypfile": true,
   "bugs": {
-    "url": "https://github.com/a-iv/node-pipedexec/issues"
+    "url": "https://github.com/100maketov/node-pipedexec/issues"
   },
-  "homepage": "https://github.com/a-iv/node-pipedexec"
+  "homepage": "https://github.com/100maketov/node-pipedexec"
 }
